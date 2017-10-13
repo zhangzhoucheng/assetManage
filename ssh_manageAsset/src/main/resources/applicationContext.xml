@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xmlns:aop="http://www.springframework.org/schema/aop"
+xmlns:tx="http://www.springframework.org/schema/tx"
+xsi:schemaLocation="
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+   
+  <!-- <bean id="book" class="com.bean.zz.Book">
+     
+     
+       利用属性完成set 注入：在bean对象中实现set方法
+      <property name="bookName" value="JavaEE教材"></property>
+      
+  
+  
+      利用构造方法完成构造注入： 在bean对象中实现构造方法
+      <constructor-arg name="id" value="1"></constructor-arg>
+      <constructor-arg name="bookName" value="java"></constructor-arg>
+      <constructor-arg name="bookPub" value="电子工业出版社"></constructor-arg>
+      <constructor-arg name="bookPrice" value="15.02"></constructor-arg>
+      
+      
+      <property name="book" ref="book"></property>
+      <property name="list">
+        
+          <list>
+             <ref bean="book"/>
+          
+          </list>
+      
+      </property>
+      
+  
+ </bean> -->
+<!--  <bean name="colorBox" class="com.bean.zz.ColorBox"> -->
+<!--  <property name="color" value="red"></property> -->
+<!--  </bean> -->
+<!--  <bean name="blackBox" class="com.bean.zz.BlackBox"> -->
+<!--  <property name="blackColor" value="black"></property> -->
+<!--  </bean> -->
+ 
+<!--  <bean name="print" class="com.bean.zz.Print"> -->
+<!--  <property name="print" ref="colorBox"></property> -->
+<!--  </bean> -->
+  <!-- 利用set注入可以在每个属性property的value中给对应赋值，
+  bean name是给bean取个名字而已，（除非在另一种配置中需要和类中的名称对应，），后面的class类是指对应哪个类，
+  之后可以是一个bean的注入，也可以多个bean注入，此处是注入两个bean，配置了依赖的关系，test1Bean依赖于interfaceDaoBean
+  所以在测试函数test1_go中可以通过调用bean来访问相应的类，自然可以访问到该test1类中所定义的属性（此处属性可以是其他类，注意要在配置文件中配置）
+  而在该bean的属性property中ref依赖上一个bean的时候，注意此bean对应的类，和上bean对应的类之间的联系，可以是同一个类（一般不这样用），也可以此bean是接口上一个bean是实现，这样可以体现
+  接口的好处，只通过修改配置文件就可以灵 活调用哪一个接口，而不用在具体代码中去改变， -->
+ 
+ <!--  加载数据库的源 -->
+ <bean name="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+                                 
+            <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+            <property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+             <property name="username" value="root"></property>
+             <property name="password" value="123456"></property>
+ </bean>
+  
+<!--   注入sessionFactory -->
+  <bean name="mySessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+             <property name="dataSource" ref="myDataSource"></property>
+              <property name="packagesToScan" >
+                    <list>
+                    <value>com.zz.model</value>
+                   
+                    </list>
+              </property>
+              <property name="hibernateProperties">
+                  <value> 
+                  hibernate.dialect=org.hibernate.dialect.MySQLDialect
+                   hibernate.hbm2ddl.auto=update
+                  </value>
+                 
+              </property>
+              
+              
+  </bean> 
+<!--   建立事务管理器 -->
+    <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager" >
+        <property name="sessionFactory" ref="mySessionFactory"></property>
+    </bean>
+    <!-- 事务建议，通知，也就是name=*对应的所有方法都满足属性required -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+      <tx:attributes >
+            <tx:method name="*" propagation="REQUIRED"/>
+      </tx:attributes>
+     </tx:advice>
+      <bean name="hibernateTemplate" class="org.springframework.orm.hibernate4.support.HibernateDaoSupport;">
+               <property name="sessionFactory" ref="mySessionFactory"></property>      
+      </bean>
+     
+     <!-- aop面向切面，以下实现aop事务管理 -->
+      <aop:config >
+      <!--   切点 -->
+         <aop:pointcut expression="execution(* com.zz.service.*.*(..))" id="point" />
+       <!-- aop的建议者  绑定切点和指向事务的建议，从而将切割的方法指向事务建议，形成事务机制 -->
+          <aop:advisor advice-ref="txAdvice" pointcut-ref="point"/>
+      </aop:config>      
+   <context:component-scan base-package="com.zz.dao"></context:component-scan>   
+   <context:component-scan base-package="com.zz.service"></context:component-scan>  
+   <context:component-scan base-package="com.zz.action"></context:component-scan>   
+
+</beans>
