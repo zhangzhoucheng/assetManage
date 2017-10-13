@@ -35,7 +35,7 @@ public class LoginAction implements ModelDriven<User>{
 		this.userService = userService;
 	}
 
-	@Override
+
 	public User getModel() {
 		// TODO Auto-generated method stub
 		return user;

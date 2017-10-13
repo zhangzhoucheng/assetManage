@@ -13,7 +13,7 @@ import com.zz.dao.UserDao;
 import com.zz.model.User;
 
 
-@Service(value="userService")
+@Service
 public class UserService {
 
 	/*注解方式注入依赖关系,通过设置的bean名字去找到该bean*/
