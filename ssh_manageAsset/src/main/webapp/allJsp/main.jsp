@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
+	<%-- <1>下c标签用于获取上下文路径，从而下面的ajax请求的url地址可以写成${rootPath}/*action
+	<2>第二种url写法，可以写/项目名/*action,也可以。或者写全路径名
+	<3>以上方法推荐第一种 --%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />	
+
+	
 <!DOCTYPE html>
 <html>
 <head>

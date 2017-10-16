@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="indexPageAction" method="post">
+<form action="testPagePageAction" method="post">
 <input type="submit" value="gogo">
 </form>
 </body>

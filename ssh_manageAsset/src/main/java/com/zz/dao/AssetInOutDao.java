@@ -3,15 +3,21 @@ package com.zz.dao;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.page.pageModel.TransactionModel;
 import com.zz.model.AssetInOut;
 
 /***
@@ -154,6 +160,18 @@ public class AssetInOutDao {
 		
 		
 		return null;
+	}
+	public void testPage() {
+		// TODO Auto-generated method stub
+		
+	List<TransactionModel> tms =(List<TransactionModel>) hibernateTemplate.find("from TransactionModel" );
+	HttpServletRequest request=ServletActionContext.getRequest();
+	HttpServletResponse response=ServletActionContext.getResponse();
+	for(TransactionModel t:tms){
+		System.out.println(t.toString());
+		
+	}
+	request.setAttribute("transaction", tms);
 	}
 
 }

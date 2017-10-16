@@ -167,6 +167,19 @@ public class InOutAction {
 		
 	}
 	
+	
+/**
+ * 此处是测试page的函数
+ */
+	
+	public String testPage(){
+		System.out.println("访问到testPage");
+		assetInOutService.testPage();
+		System.out.println("testPage完成");
+		return "testPage";
+		
+	}
+	
 	/*
 	 * %%%%%关于处理曲线图的问题，首先通过当前页面获取的年份值以及月份值，从而计算出该月有多少天
 	 * %%%%%之后建立两个个list<BigDecimal>集合，用于存放通过for循环查询数据库依次获取的到1号到30号（如果是30天该月）

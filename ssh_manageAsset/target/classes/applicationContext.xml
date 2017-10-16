@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
@@ -57,7 +58,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd
 		<property name="packagesToScan">
 			<list>
 				<value>com.zz.model</value>
-
+                <value>com.page.pageModel</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -93,6 +94,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd
 		<!-- aop的建议者 绑定切点和指向事务的建议，从而将切割的方法指向事务建议，形成事务机制 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="point" />
 	</aop:config>
+	<!-- hibernateTemplate可以注入到dao层，从而可以实现增删查改的基础操作 -->
 	<bean name="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>

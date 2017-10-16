@@ -115,4 +115,10 @@ public class AssetInOutService {
 		
 		return assetInOutDao.assetQueryIn(year);
 	}
+
+	public void testPage() {
+		// TODO Auto-generated method stub
+		System.out.println("访问到service层testPage");
+		assetInOutDao.testPage();
+	}
 }

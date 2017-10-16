@@ -47,7 +47,7 @@ isELIgnored="false"
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="item" items="${transaction.result}">
+								<c:forEach var="item" items="${transaction}">
 									<tr>
 										<td>${item.id}</td>
 										<td>${item.region}</td>
@@ -60,7 +60,7 @@ isELIgnored="false"
 
 						<!-- 自定义分页处理TagLib -->
 					
-			        <zzPage:page pageSize="${transaction.pageSize}" pageNo="${transaction.pageNo}" url="index" totalCount="${transaction.totalCount}"/>
+			        <zzPage:page pageSize="4" pageNo="1" url="index" totalCount="${transaction.size}"/>
 					</div>
 				</div>
 			</div>

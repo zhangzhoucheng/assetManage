@@ -67,12 +67,12 @@
 
 
          <!-- 通配符方式实现分页测试方法 -->
-		<action name="*PageAction" class="com.page.pageController.IndexController"
+		<action name="*PageAction" class="com.zz.action.InOutAction"
 			method="{1}">
-			<interceptor-ref name="intercepKeyWord_go"></interceptor-ref>
-			<result name="success">/{1}success.jsp</result>
-			<result name="{1}">/index.jsp</result>
-			<result name="login">register.jsp</result>
+			
+		
+			<result name="{1}">index1.jsp</result>
+		
 		</action>
 	</package>
 
