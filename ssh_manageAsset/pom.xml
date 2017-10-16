@@ -8,6 +8,8 @@
 	<name>spring_hibernateIntergrate1 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
+	
+	   <!--  运行junit测试的包 -->
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -15,20 +17,31 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
-<dependency>
-    <groupId>org.apache.tomcat</groupId>
-    <artifactId>tomcat-catalina</artifactId>
-    <version>8.0.38</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>5.1.13</version>
-</dependency>
-
+		<dependency>
+			<groupId>org.apache.maven.surefire</groupId>
+			<artifactId>surefire-junit47</artifactId>
+			<version>2.18</version>
+		</dependency>	
 		
+		
+		<!-- 用于tomcat的包 -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina</artifactId>
+			<version>8.0.38</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        
+		<!-- 用于数据库的包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.13</version>
+		</dependency>
+
+
+		<!-- spring两个最基础的包 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -42,12 +55,14 @@
 			<version>4.3.11.RELEASE</version>
 		</dependency>
 
+		<!-- spring orm意思是spring对象关系映射，spring连接到其他框架需要的包 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>4.3.11.RELEASE</version>
 		</dependency>
+
 		<!--spring-web依赖，用来web.xml注入spring-web -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -55,18 +70,23 @@
 			<version>4.3.11.RELEASE</version>
 		</dependency>
 
+		<!-- hibernate的包 -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.11.Final</version>
 		</dependency>
+
+		<!-- 数据库连接池的包 -->
 		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>
 		</dependency>
+
+		<!-- 关于日志的三个包 -->
 		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -89,6 +109,7 @@
 		</dependency>
 
 
+		<!-- struts2结合到spring需要的两个包 -->
 		<!-- https://mvnrepository.com/artifact/org.apache.struts/struts2-core -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -109,6 +130,7 @@
 		<!-- <dependency> <groupId>javax.servlet.jsp.jstl</groupId> <artifactId>jstl</artifactId> 
 			<version>1.2</version> </dependency> -->
 
+		<!-- jstl表达式用的两个包 -->
 		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -124,6 +146,7 @@
 			<version>1.0.6</version>
 		</dependency>
 
+		<!-- 如下是aop需要的三个包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
@@ -143,9 +166,15 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>1.5.4</version>
 		</dependency>
-		
+
+		<!-- guava包，更方便定义集合泛型，以及只读设置 -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>18.0</version>
+		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>spring_struts2</finalName>
 	</build>

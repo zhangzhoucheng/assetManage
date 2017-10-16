@@ -3,9 +3,11 @@ package com.zz.action;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.zz.model.AssetInOut;
 import com.zz.service.AssetInOutService;
 
@@ -13,16 +15,18 @@ import com.zz.service.AssetInOutService;
 /*当然为了简便代码此处action中也包括对数据的修改，删除，查询的功能，利用通配符实现action*/
 public class InOutAction {
 
-	/*此处id用于获取删除，编辑操作时候的id从而进行相关操作*/
-	private int id;
-	public int getId() {
-		return id;
+	/*此处num用于获取删除，编辑操作时候的id从而进行相关操作*/
+	private int num;
+	
+	
+	public int getNum() {
+		return num;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setNum(int num) {
+		this.num = num;
 	}
-	
+
 	/*此处类型，用于做查询时候下拉框选择：收入，支出，全部的值获取*/
 	private String type;
 	
@@ -83,6 +87,8 @@ public class InOutAction {
 	 */
 	public void assetSave(){
 		
+		assetInOut.setMoney(12);
+		assetInOut.setType("测试");
 		assetInOutService.assetSave(assetInOut);
 	}
 	
@@ -91,7 +97,7 @@ public class InOutAction {
 	 */
 	public void assetDelete(){
 		
-		assetInOutService.assetDelete(id);
+		assetInOutService.assetDelete(num);
 	}
 	
 	/***
@@ -111,6 +117,23 @@ public class InOutAction {
 		return "success";
 	}
 	
+	public void  assetQueryAllAjax(){
+		System.out.println("请求到ajax1");
+		
+		ActionContext ac=ActionContext.getContext();
+		 Map<String, Object>  session=ac.getSession();
+		 System.out.println("hi1");
+		 list=assetInOutService.assetQueryAll();
+		 System.out.println("hi2");
+		for(AssetInOut a:list){
+			System.out.println("**"+a.toString());
+		}
+		 session.put("list",list);
+		 
+		
+		
+		
+	}
 	/***
 	 * 查询该日期下的对应类型的收支信息集合
 	 * @return

@@ -77,7 +77,6 @@ public class AssetInOutService {
 	 * @param assetInOut
 	 */
 	public List<AssetInOut> assetQueryAll() {
-		// TODO Auto-generated method stub
 		
 		list=assetInOutDao.assetQueryAll();
 		return list;

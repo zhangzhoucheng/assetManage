@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.zz.model.AssetInOut;
@@ -24,14 +24,14 @@ public class AssetInOutDao {
     
 /*	通过HibernateTemplate对象去访问数据库，都不用获取session，直接使用
 */	
-	@Resource
+	
 	private HibernateTemplate hibernateTemplate ;
 	
 	
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
-	}
-
+	}             
+	@Resource(name="hibernateTemplate")
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
@@ -101,11 +101,14 @@ public class AssetInOutDao {
 	}
 
 
+	
+	@SuppressWarnings("unchecked")
 	public List<AssetInOut> assetQueryAll() {
 		// TODO Auto-generated method stub
 		
 		/*查询所有收支信息*/
-     list=(List<AssetInOut>) hibernateTemplate.find("from AssetInOut");
+		
+     list=(List<AssetInOut>)this.hibernateTemplate.find("from AssetInOut");
 		
 		return list;
 	}

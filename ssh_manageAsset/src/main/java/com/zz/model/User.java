@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="tb_sshManageAsset")
+@Table(name="tb_user")
 public class User {
 
 	@Id

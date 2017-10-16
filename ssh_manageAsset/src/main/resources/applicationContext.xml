@@ -14,6 +14,7 @@ http://www.springframework.org/schema/tx
 http://www.springframework.org/schema/tx/spring-tx.xsd
 http://www.springframework.org/schema/aop
 http://www.springframework.org/schema/aop/spring-aop.xsd
+
 ">
 
 	<!-- <bean id="book" class="com.bean.zz.Book"> 利用属性完成set 注入：在bean对象中实现set方法 
@@ -44,7 +45,7 @@ http://www.springframework.org/schema/aop/spring-aop.xsd
 		destroy-method="close">
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/ssh_assetManage"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="123456"></property>
 	</bean>
@@ -70,21 +71,19 @@ http://www.springframework.org/schema/aop/spring-aop.xsd
 
 	</bean>
 	<!-- 建立事务管理器 -->
-	<bean id="txManager"
+	 <bean id="txManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
+	
 	<!-- 事务建议，通知，也就是name=*对应的所有方法都满足属性required -->
+	
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
-			<tx:method name="*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="REQUIRED"/>
 		</tx:attributes>
-	</tx:advice>
-	<bean name="hibernateTemplate"
-	  
-		class="org.springframework.orm.hibernate5.HibernateTemplate">
-		<property name="sessionFactory" ref="mySessionFactory"></property>
-	</bean>
+	</tx:advice>                         
+	
 
 	<!-- aop面向切面，以下实现aop事务管理 -->
 	<aop:config>
@@ -94,6 +93,10 @@ http://www.springframework.org/schema/aop/spring-aop.xsd
 		<!-- aop的建议者 绑定切点和指向事务的建议，从而将切割的方法指向事务建议，形成事务机制 -->
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="point" />
 	</aop:config>
+	<bean name="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="mySessionFactory"></property>
+	</bean>
+	
 	<context:component-scan base-package="com.zz"></context:component-scan>
 	
 

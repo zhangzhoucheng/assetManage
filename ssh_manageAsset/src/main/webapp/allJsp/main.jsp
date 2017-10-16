@@ -12,7 +12,7 @@
 <!-- 导入js函数 -->
 <script type="text/javascript" src="../js/main.js"></script>
 <!-- 导入jquery架包 -->
-<script type=" text/javascript" src="../js/jquery-3.2.1.js"></script>
+<!-- <script type=" text/javascript" src="../js/jquery-3.2.1.js"></script> -->
 <style>
 /*百分比布局*/
 body {
@@ -94,6 +94,10 @@ body {
 	         * （实现左侧菜单中的标签点击后变化的效果）
 	         */
 
+	         
+	         
+	         
+	         
 	            $('#mid_left_top div a').click(function (e) {
 	                //e.preventDefault();    加上这句则导航的<a>标签会失效
 	                $('#mid_left_top div a').removeClass('active');
@@ -102,55 +106,100 @@ body {
 	       
 		})
 		
+		function delay(){
+			
+		}
+		
+		//原生的ajax请求
+		function myXmlHttpRequest(url){
+			
+			 var xmlHttp;
+	            
+	            if (window.XMLHttpRequest) {
+	                // code for IE7+, Firefox, Chrome, Opera, Safari
+	                xmlHttp=new XMLHttpRequest();    //创建 XMLHttpRequest对象
+	            }
+	            else {
+	                // code for IE6, IE5
+	                xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+	            }
+	        
+	            xmlHttp.onreadystatechange=function() {        
+	                //onreadystatechange — 当readystate变化时调用后面的方法
+	                
+	                if (xmlHttp.readyState == 4) {
+	                    //xmlHttp.readyState == 4    ——    finished downloading response
+	                    
+	                    if (xmlHttp.status == 200) {
+	                        //xmlHttp.status == 200        ——    服务器反馈正常            
+	                        
+	                       
+	                            
+	               
+	                  
+	                        	
+	                      
+	                        
+	                        document.getElementById("mid_right").innerHTML=xmlHttp.responseText;    //重设页面中id="mid_right"的div里的内容
+	                        executeScript(xmlHttp.responseText);    //执行从服务器返回的页面内容里包含的JavaScript函数
+	                    }
+	                    //错误状态处理
+	                    else if (xmlHttp.status == 404){
+	                        alert("出错了☹   （错误代码：404 Not Found），……！"); 
+	                        /* 对404的处理 */
+	                        return;
+	                    }
+	                    else if (xmlHttp.status == 403) {  
+	                        alert("出错了☹   （错误代码：403 Forbidden），……"); 
+	                        /* 对403的处理  */ 
+	                        return;
+	                    }
+	                    else {
+	                        alert("出错了☹   （错误代码：" + request.status + "），……"); 
+	                        /* 对出现了其他错误代码所示错误的处理   */
+	                        return;
+	                    }   
+	                } 
+	                    
+	            }
+	            
+	            //把请求发送到服务器上的指定文件（url指向的文件）进行处理
+	            xmlHttp.open("GET", url+"?k="+Math.random(), true);        //true表示异步处理
+	            xmlHttp.send();
+		}
 		/* 用于点击后显示页面操作 ，即在右侧div显示jsp页面 */
 		function showAtRight(url) {
-            var xmlHttp;
+			
+			/* "此处内嵌的ajax请求，用于先访问actionn,在域中获取到list列表" */
+			 if(url=="costQuery.jsp"){
+	                $.ajax({
+	             	   type:"post",
+	             	   url:"assetQueryAllAjaxOperateAction",
+	             	   
+	             	  
+	             	   success:function(data){
+	             		 
+	             		  myXmlHttpRequest(url);
+	             	   },
+	             	   error:function(){
+	             		  alert(2);
+	             	   }
+	                })
+	                  }
+			 else{
+				 myXmlHttpRequest(url);
+			 }
+			 /* 之所以先调用一个ajax请求没能加载处列表，是由于数据库访问需要时间，所以此处设置一个时间函数控制下 */
+		
+           
             
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlHttp=new XMLHttpRequest();    //创建 XMLHttpRequest对象
-            }
-            else {
-                // code for IE6, IE5
-                xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-        
-            xmlHttp.onreadystatechange=function() {        
-                //onreadystatechange — 当readystate变化时调用后面的方法
-                
-                if (xmlHttp.readyState == 4) {
-                    //xmlHttp.readyState == 4    ——    finished downloading response
-                    
-                    if (xmlHttp.status == 200) {
-                        //xmlHttp.status == 200        ——    服务器反馈正常            
-                        
-                        document.getElementById("mid_right").innerHTML=xmlHttp.responseText;    //重设页面中id="mid_right"的div里的内容
-                        executeScript(xmlHttp.responseText);    //执行从服务器返回的页面内容里包含的JavaScript函数
-                    }
-                    //错误状态处理
-                    else if (xmlHttp.status == 404){
-                        alert("出错了☹   （错误代码：404 Not Found），……！"); 
-                        /* 对404的处理 */
-                        return;
-                    }
-                    else if (xmlHttp.status == 403) {  
-                        alert("出错了☹   （错误代码：403 Forbidden），……"); 
-                        /* 对403的处理  */ 
-                        return;
-                    }
-                    else {
-                        alert("出错了☹   （错误代码：" + request.status + "），……"); 
-                        /* 对出现了其他错误代码所示错误的处理   */
-                        return;
-                    }   
-                } 
-                    
-              }
-            
-            //把请求发送到服务器上的指定文件（url指向的文件）进行处理
-            xmlHttp.open("GET", url, true);        //true表示异步处理
-            xmlHttp.send();
-        }        
+      
+                  
+          
+		
+	
+	}
+		
 	</script>
 <body>
 
@@ -186,6 +235,7 @@ body {
 			</div>
 			<div id="mid_right">
 				<!--用于加载点击菜单栏所对应的页面,如下是初始页面-->
+				
 				<jsp:include page="manageMoneyNews.jsp"></jsp:include>
 			</div>
 		</div>
