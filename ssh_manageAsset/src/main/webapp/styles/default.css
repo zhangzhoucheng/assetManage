@@ -1,0 +1,183 @@
+/*****************************************************************************
+ * Copyright (c) 2015, www.qingshixun.com
+ *
+ * All rights reserved
+ *
+ *****************************************************************************/
+
+/********** 2. STYLES **********/
+body {
+	font-size: 14px;
+	color: #636E7B;
+	background-color: #fff;
+}
+
+.content-header {
+	background-color: #48929B;
+}
+
+.content-header h1, .content-header h2 {
+	margin: 0;
+	font-size: 26px;
+	line-height: 32px;
+	color: #fff;
+}
+
+.content-header small {
+	font-size: 17px;
+	color: #fff !important;
+}
+
+.header-section h1 i {
+	font-size: 56px;
+	float: right;
+	color: #eaedf1;
+	line-height: 60px
+}
+
+.header-section {
+	padding: 10px 10px
+}
+
+.block {
+	margin: 0 0 10px;
+	padding: 20px 15px 1px;
+	background-color: #fff;
+}
+
+.block.full {
+	padding: 20px 15px
+}
+
+.block .block-content-full {
+	margin: -20px -15px -1px
+}
+
+.block .block-content-mini-padding {
+	padding: 8px
+}
+
+.block.full .block-content-full {
+	margin: -20px -15px
+}
+
+.block-title {
+	margin: -20px -15px 20px;
+	background-color: #f9fafc;
+	border-bottom: 1px solid #eaedf1
+}
+
+.block-title h1, .block-title h2, .block-title h3, .block-title h4,
+	.block-title h5, .block-title h6 {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 1.4;
+	margin: 0;
+	padding: 10px 16px 7px;
+	font-weight: 400
+}
+
+.block-title h1 small, .block-title h2 small, .block-title h3 small,
+	.block-title h4 small, .block-title h5 small, .block-title h6 small {
+	font-size: 13px;
+	color: #777;
+	font-weight: 400
+}
+
+.block-title h1, .block-title h2, .block-title h3 {
+	padding-left: 15px;
+	padding-right: 15px
+}
+
+.block-options, .block-title .nav-tabs {
+	min-height: 40px;
+	line-height: 38px
+}
+
+.block-title .nav-tabs {
+	padding: 3px 1px 0;
+	border-bottom: none
+}
+
+.block-title .nav-tabs>li>a {
+	border-bottom: none
+}
+
+.block-title .nav-tabs {
+	margin-bottom: -2px
+}
+
+.block-title .nav-tabs>li>a {
+	margin-bottom: 0
+}
+
+.block-title .nav-tabs>li>a:hover {
+	background: 0 0
+}
+
+.block-title .nav-tabs>li.active>a, .block-title .nav-tabs>li.active>a:focus,
+	.block-title .nav-tabs>li.active>a:hover {
+	border: 1px solid #eaedf1;
+	border-bottom-color: #fff;
+	background-color: #fff
+}
+
+.block-title code {
+	padding: 2px 3px
+}
+
+.block-options {
+	margin: 0 6px;
+	line-height: 37px
+}
+
+.block-options .label {
+	display: inline-block;
+	padding: 6px;
+	vertical-align: middle;
+	font-size: 13px
+}
+
+.block-top {
+	margin: -20px -15px 20px;
+	border-bottom: 1px dotted #dbe1e8
+}
+
+/* 默认分页样式 */
+.default-paging {
+	padding: 5px;
+	float: right;
+	font-size: 13px;
+}
+
+.default-paging a, .default-paging a:link, .default-paging a:visited {
+	padding: 5px 10px;
+	margin: 2px;
+	border: 1px solid #aaaadd;
+	text-decoration: none;
+	color: #006699;
+}
+
+.default-paging a:hover, .default-paging a:active {
+	border: 1px solid #5D9CEC;
+	color: #000;
+	text-decoration: none;
+}
+
+.default-paging span.current {
+	padding: 5px 10px;
+	margin: 2px;
+	border: 1px solid #5D9CEC;
+	font-weight: bold;
+	background-color: #5D9CEC;
+	color: #FFF;
+	margin: 2px;
+}
+
+.default-paging span.disabled {
+	padding: 5px 10px;
+	margin: 2px;
+	border: 1px solid #eee;
+	color: #ddd;
+	margin: 2px;
+}
