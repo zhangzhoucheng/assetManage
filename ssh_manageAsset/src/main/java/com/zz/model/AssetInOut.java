@@ -1,6 +1,6 @@
 package com.zz.model;
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="tb_sshAssetInOut")
+@Table(name="tb_sshassetinout")
 public class AssetInOut {
 
 	@Id
@@ -64,8 +64,9 @@ public class AssetInOut {
 	}
 	@Override
 	public String toString() {
-		return "AssetInOut [id=" + id + ", userName=" + userName + ", type=" + type + ", money=" + money + ", remark="
-				+ remark + "]";
+		return "AssetInOut [id=" + id + ", userName=" + userName + ", type=" + type + ", money=" + money + ", time="
+				+ time + ", remark=" + remark + "]";
 	}
+	
 	
 }

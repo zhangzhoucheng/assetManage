@@ -45,10 +45,11 @@
 		</action>
 
 		<!-- 通配符方式实现InOutAction方法 -->
-		<action name="*EditAction" class="com.zz.action.InOutAction"
+		<action name="*OperateAction" class="com.zz.action.InOutAction"
 			method="{1}">
 			<result name="success">/{1}success.jsp</result>
 			<result name="{1}">/{1}.jsp</result>
+			<result name="te1">/allJsp/t1.jsp</result>
 		</action>
 
 
@@ -56,7 +57,7 @@
 
 
 		<!-- 通配符方式实现RegisterAction方法 -->
-		<action name="*EditAction" class="com.zz.action.RegisterAction"
+		<action name="*RegisterAction" class="com.zz.action.RegisterAction"
 			method="{1}">
 			<interceptor-ref name="intercepKeyWord_go"></interceptor-ref>
 			<result name="success">/{1}success.jsp</result>
@@ -64,6 +65,15 @@
 			<result name="login">register.jsp</result>
 		</action>
 
+
+         <!-- 通配符方式实现分页测试方法 -->
+		<action name="*PageAction" class="com.zz.action.InOutAction"
+			method="{1}">
+			
+		
+			<result name="{1}">index1.jsp</result>
+		
+		</action>
 	</package>
 
 </struts>

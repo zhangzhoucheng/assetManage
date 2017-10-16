@@ -3,15 +3,21 @@ package com.zz.dao;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate5.HibernateTemplate;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.page.pageModel.TransactionModel;
 import com.zz.model.AssetInOut;
 
 /***
@@ -24,14 +30,14 @@ public class AssetInOutDao {
     
 /*	通过HibernateTemplate对象去访问数据库，都不用获取session，直接使用
 */	
-	@Resource
+	
 	private HibernateTemplate hibernateTemplate ;
 	
 	
 	public HibernateTemplate getHibernateTemplate() {
 		return hibernateTemplate;
-	}
-
+	}             
+	@Resource(name="hibernateTemplate")
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
@@ -101,11 +107,14 @@ public class AssetInOutDao {
 	}
 
 
+	
+	@SuppressWarnings("unchecked")
 	public List<AssetInOut> assetQueryAll() {
 		// TODO Auto-generated method stub
 		
 		/*查询所有收支信息*/
-     list=(List<AssetInOut>) hibernateTemplate.find("from AssetInOut");
+		
+     list=(List<AssetInOut>)this.hibernateTemplate.find("from AssetInOut");
 		
 		return list;
 	}
@@ -151,6 +160,18 @@ public class AssetInOutDao {
 		
 		
 		return null;
+	}
+	public void testPage() {
+		// TODO Auto-generated method stub
+		
+	List<TransactionModel> tms =(List<TransactionModel>) hibernateTemplate.find("from TransactionModel" );
+	HttpServletRequest request=ServletActionContext.getRequest();
+	HttpServletResponse response=ServletActionContext.getResponse();
+	for(TransactionModel t:tms){
+		System.out.println(t.toString());
+		
+	}
+	request.setAttribute("transaction", tms);
 	}
 
 }

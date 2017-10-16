@@ -77,7 +77,6 @@ public class AssetInOutService {
 	 * @param assetInOut
 	 */
 	public List<AssetInOut> assetQueryAll() {
-		// TODO Auto-generated method stub
 		
 		list=assetInOutDao.assetQueryAll();
 		return list;
@@ -115,5 +114,11 @@ public class AssetInOutService {
 		// TODO Auto-generated method stub
 		
 		return assetInOutDao.assetQueryIn(year);
+	}
+
+	public void testPage() {
+		// TODO Auto-generated method stub
+		System.out.println("访问到service层testPage");
+		assetInOutDao.testPage();
 	}
 }
